@@ -1,4 +1,4 @@
-package com.board.DAO;
+package com.board.VO;
 
 import lombok.Builder;
 import lombok.Getter;
