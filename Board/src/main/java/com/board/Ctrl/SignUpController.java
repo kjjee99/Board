@@ -1,14 +1,14 @@
 package com.board.Ctrl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.board.DAO.MemberDAO;
+import com.board.DTO.MemberDTO;
+import com.board.Service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,25 +17,30 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(path="/account")
 public class SignUpController {
 	@Autowired
-	private MemberDAO memberDAO;
-	
-	@GetMapping(path="/all")
-	public @ResponseBody String getAlluser() {
-		String mem = memberDAO.findAll().get(0).getUserID();
-		log.info(mem, memberDAO.findAll().get(0));
-		return memberDAO.toString();
-	}
+	MemberService service;
 	
 	@RequestMapping("/user")
 	public ModelAndView inputBox() {
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("user", new MemberDTO());
 		mv.setViewName("signUp");
 		return mv;
 	}
 	
-	@GetMapping("/test")
-	public String test() {
-		System.out.println("test");
-		return "test";
+	@PostMapping("/complete")
+	public ModelAndView complete(@ModelAttribute("user") MemberDTO member) {
+		ModelAndView mv = new ModelAndView();
+		log.info(member.getId());
+		log.info(member.getPw());
+		service.addMember(member);
+		mv.setViewName("signUp_complete");
+		return mv;
 	}
+	
+	//test
+//	@GetMapping("/test")
+//	public String test() {
+//		System.out.println("test");
+//		return "test";
+//	}
 }
