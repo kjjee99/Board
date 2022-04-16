@@ -6,35 +6,31 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Table(name = "member")
 @IdClass(memberID.class)
 @ToString
 public class Member{
 	@Id
-	@Column(name = "idx")
-	private String idx;
-	@Id
-	@Column(name = "userID")
+	@Column(name = "user_id")
 	private String userID;
-	@Column(name = "userPW")
+	@Column(name = "user_pw")
 	private String userPW;
-	@Column(name = "userName")
+	@Column(name = "user_name")
 	private String userName;
-	@Column(name = "userPhone")
+	@Column(name = "user_phone")
 	private String userPhone;
-	@Column(name = "userEmail")
+	@Column(name = "user_email")
 	private String userEmail;
-	@Column(name = "userAddress")
+	@Column(name = "user_addr")
 	private String userAddress;
 	
 	@Builder
