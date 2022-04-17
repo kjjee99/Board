@@ -1,6 +1,7 @@
 package com.board.Ctrl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,13 @@ public class MemberController {
 		service.addMember(member);
 		mv.setViewName("signUp_complete");
 		return mv;
+	}
+	
+	@GetMapping("/login")
+	public ModelAndView login() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("login");
+		return mav;
 	}
 	
 	//test
