@@ -24,22 +24,24 @@
 			border: solid 1px grey;
 		}
 	</style>
+	
 </head>
 
 <body>
 	<h2>회원가입</h2>
-
-	<form th:action="@{/account/complete}" th:object="${user}" method="POST">
+	<form  th:object="${user}" th:action="@{/account/complete}" id="form" method="POST">
 		<div class="boxes">
-			<p>ID </p> <input class="input" type="text" th:field="*{id}" />
-			<p>Password</p> <input class="input" type="password" th:field="*{pw}"/>
-			<p>Name</p> <input class="input" type="text" th:field="*{name}"/>
-			<p>Email</p> <input class="input" type="email" th:field="*{email}"/>
-			<p>PhoneNumber</p> <input class="input" type="text" th:field="*{phone}"/>
-			<p>Address</p> <input class="input" type="text" th:field="*{address}"/>
+			<p>ID </p> <input class="input" id="input-id" type="text" th:field="*{id}" placeholder="ID를 입력하세요." />
+			<p>Password</p> <input class="input" id="input-pw" type="password" th:field="*{pw}" placeholder="Password를 입력하세요."/>
+			<p>Name</p> <input class="input" id="input-name" type="text" th:field="*{name}" placeholder="이름을 입력하세요."/>
+			<p>Email</p> <input class="input" id="input-email" type="email" th:field="*{email}" placeholder="Email을 입력하세요."/>
+			<p>PhoneNumber</p> <input class="input" id="input-phone" type="text" th:field="*{phone}" placeholder="전화번호를 입력하세요."/>
+			<p>Address</p> <input class="input" id="input-addr" type="text" th:field="*{address}" placeholder="주소를 입력하세요."/>
 		</div>
 		<input type="submit" text="제출" />
 	</form>
+	
+	<script type="text/javascript" th:src="@{/js/signUp.js}"></script>
 </body>
 
 </html>
