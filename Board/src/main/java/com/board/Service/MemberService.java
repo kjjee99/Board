@@ -41,6 +41,7 @@ public class MemberService {
 		}
 		//pw가 다를 경우
 		else {
+			//TODO: alert 설정
 			log.error("password is difference");
 			return false;
 		}

@@ -21,18 +21,18 @@ public class MemberController {
 	MemberService service;
 	
 	@RequestMapping("/user")
-	public ModelAndView inputBox() {
+	public ModelAndView getInfoToSignUp() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user", new MemberDTO());
-		mv.setViewName("signUp");
+		mv.setViewName("getMemberInfo");
 		return mv;
 	}
 	
-	@PostMapping("/signupComplete")
-	public ModelAndView complete(@ModelAttribute("user") MemberDTO member) {
+	@PostMapping("/signup-success")
+	public ModelAndView doSignUp(@ModelAttribute("user") MemberDTO member) {
 		ModelAndView mv = new ModelAndView();
 		service.addMember(member);
-		mv.setViewName("signUp_complete");
+		mv.setViewName("signUp_success");
 		return mv;
 	}
 	
@@ -48,6 +48,7 @@ public class MemberController {
 	public ModelAndView doLogin(@ModelAttribute("user") MemberDTO member) {
 		ModelAndView mav = new ModelAndView();
 		boolean isLoginComplete = service.login(member);
+		//TODO: 로그인 성공 시 로그인 버튼 -> 로그아웃으로 변경하기
 		if(isLoginComplete)	mav.setViewName("redirect:/home");
 		else				mav.setViewName("redirect:/account/login");
 		return mav;
