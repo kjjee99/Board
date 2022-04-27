@@ -28,11 +28,9 @@ public class MemberController {
 		return mv;
 	}
 	
-	@PostMapping("/complete")
+	@PostMapping("/signupComplete")
 	public ModelAndView complete(@ModelAttribute("user") MemberDTO member) {
 		ModelAndView mv = new ModelAndView();
-		log.info(member.getId());
-		log.info(member.getPw());
 		service.addMember(member);
 		mv.setViewName("signUp_complete");
 		return mv;
@@ -41,7 +39,17 @@ public class MemberController {
 	@GetMapping("/login")
 	public ModelAndView login() {
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("user", new MemberDTO());
 		mav.setViewName("login");
+		return mav;
+	}
+	
+	@PostMapping("/login.do")
+	public ModelAndView doLogin(@ModelAttribute("user") MemberDTO member) {
+		ModelAndView mav = new ModelAndView();
+		boolean isLoginComplete = service.login(member);
+		if(isLoginComplete)	mav.setViewName("redirect:/home");
+		else				mav.setViewName("redirect:/account/login");
 		return mav;
 	}
 	
