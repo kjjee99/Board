@@ -16,7 +16,7 @@ import lombok.ToString;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Table(name = "member")
-@IdClass(memberID.class)
+//@IdClass(memberID.class)
 @ToString
 public class Member{
 	@Id
