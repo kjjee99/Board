@@ -7,6 +7,7 @@
 </head>
 
 <body>
+	<p th:text="${message}"></p>
 	<form th:action="@{/account/login.do}" th:object="${user}" method="POST">
 		<input type="text" th:field="*{id}" placeholder="아이디를 입력하세요."/>
 		<input type="password" th:field="*{pw}" placeholder="비밀번호를 입력하세요."/>
