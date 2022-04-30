@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http:www.thymeleaf.org">
 
 <head>
 	<meta charset="UTF-8" />
@@ -46,7 +46,7 @@
 		<nav class="menu">
 			<ul>
 				<li class="blank-space"></li>
-				<li><a href="/account/login">로그인</a></li>
+				<li><a href="/account/login" th:text="${btn}">로그인</a></li>
 				<li><a href="/account/user">회원가입</a></li>
 			</ul>
 		</nav>
