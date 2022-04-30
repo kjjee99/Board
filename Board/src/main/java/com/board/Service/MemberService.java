@@ -1,5 +1,7 @@
 package com.board.Service;
 
+import java.util.NoSuchElementException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,23 +30,29 @@ public class MemberService {
 	}
 	
 	/* 회원 로그인 */
-	public boolean login(MemberDTO member) {
-//		log.info(member.getId());
-		entity = dao.findById(member.getId()).get();
-//		log.error(entity.getUserID());
-		//TODO: 입력한 ID가 DB에 존재하지 않을 경우
+	public String login(MemberDTO member) {
+		try{
+			entity = dao.findById(member.getId()).get();
+			//ID와 PW가 맞아 로그인 성공
+			if(entity.getUserPW().equals(member.getPw())) {
+				log.info("login success");
+				return "true";
+			}
+			//pw가 다를 경우
+			else {
+				//TODO: alert 설정
+				log.error("password is difference");
+				return "비밀번호가 일치하지 않습니다.";
+			}
+		}
+		//입력한 ID가 DB에 존재하지 않을 경우
+		catch(NoSuchElementException e) {
+			log.error("일치하는 아이디가 존재하지 않습니다.");
+		}catch(NullPointerException e){
+			log.error("일치하는 아이디가 조재하지 않습니다.");
+		}
+		return "일치하는 정보가 없습니다.";
 		
-		//ID와 PW가 맞아 로그인 성공
-		if(entity.getUserPW().equals(member.getPw())) {
-			log.info("login success");
-			return true;
-		}
-		//pw가 다를 경우
-		else {
-			//TODO: alert 설정
-			log.error("password is difference");
-			return false;
-		}
 	}
 	
 	/* 회원 탈퇴 */
