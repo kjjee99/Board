@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.board.DTO.MemberDTO;
 import com.board.Service.MemberService;
@@ -45,12 +46,19 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login.do")
-	public ModelAndView doLogin(@ModelAttribute("user") MemberDTO member) {
+	public ModelAndView doLogin(@ModelAttribute("user") MemberDTO member,RedirectAttributes re) {
 		ModelAndView mav = new ModelAndView();
-		boolean isLoginComplete = service.login(member);
-		//TODO: 로그인 성공 시 로그인 버튼 -> 로그아웃으로 변경하기
-		if(isLoginComplete)	mav.setViewName("redirect:/home");
-		else				mav.setViewName("redirect:/account/login");
+		String loginMessage = service.login(member);
+		
+		if(loginMessage.equals("true")) {
+			//로그인 성공 시 로그인 버튼 -> 로그아웃으로 변경하기
+			re.addFlashAttribute("btn", "로그아웃");
+			mav.setViewName("redirect:/home");
+		}
+		else{
+			re.addFlashAttribute("message", loginMessage);
+			mav.setViewName("redirect:/account/login");
+		}
 		return mav;
 	}
 	
