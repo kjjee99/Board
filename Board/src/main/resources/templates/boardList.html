@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+
+<head>
+	<title>게시판</title>
+</head>
+
+<body>
+	<tbody>
+		<tr th:if="${not #lists.isEmpty(post)}" th:each="row: ${post}">
+			<td scope="row" th:text="${row.board_id}"></td>
+			<td th:text="${row.writer}"></td>
+			<td>
+			<a href="#" th:text="${row.title}"></a>
+			</td>
+			<td th:text="${#calendars.format(row.reg_date, 'yyyy-mm-dd')}"></td>
+		</tr>
+		<tr>
+			<td th:unless="${not #lists.isEmpty(post)}"></td>
+			<td colspan="3">조회된 결과가 없습니다.</td>
+		</tr>
+
+	</tbody>
+</body>
+
+</html>
