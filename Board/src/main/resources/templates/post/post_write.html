@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+
+<head>
+	<title>글쓰기</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			text-align: center;
+		}
+		form{
+			width: 100vw;
+			margin: 20px;
+		}
+		input, textarea{
+			font-size: 15pt;
+			text-align: start;
+		}
+		#title{
+			width: 50vw;
+			height: 1vh;
+			padding: 10px;
+		}
+		#content{
+			width: 50vw;
+			height: 30vh;
+			padding: 10px;
+			white-space:pre-wrap;
+			word-wrap: break-word;
+			word-break: break-all;
+		}
+		a{
+			text-decoration: none;
+			color: black;
+			background-color: rgb(240, 240, 240);
+			border: 0.1px solid black;
+			padding: 5px;
+		}
+		input[type=submit]{
+			font-size: 12pt;
+			padding: 5px;
+		}
+	</style>
+</head>
+
+<body>
+	<main>
+		<div>
+			<form th:object="${post}" th:action=@{/board/post.do} method="POST">
+			<div>
+				<p>제목</p>
+				<input type="text" id="title" th:field="*{title}" placholder="제목을 입력하세요."/>
+				<p>내용</p>
+				<textarea id="content" th:field="*{content}" placholder="내용을 입력하세요."/>
+				<div>
+				<a th:href="'/board/list'">목록으로 돌아가기</a>
+				<input type="submit" th:value="저장"/>
+			</form>
+			
+		</div>
+	</main>
+</body>
+
+</html>
