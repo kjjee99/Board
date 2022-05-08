@@ -45,8 +45,9 @@
 	<header>
 		<nav class="menu">
 			<ul>
+				<li><a href="/board/list">게시판</a></li>
 				<li class="blank-space"></li>
-				<li><a href="/account/login" th:text="${btn}">로그인</a></li>
+				<li><a href="/account/login" th:text="${btn} ? ${btn} : '로그인'"></a></li>
 				<li><a href="/account/user">회원가입</a></li>
 			</ul>
 		</nav>
