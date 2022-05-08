@@ -3,6 +3,7 @@
 
 <head>
 	<title>게시판</title>
+	<link rel="stylesheet" th:href="@{/css/menu.css}"/>
 	<style>
 		*{
 			text-align: center;
@@ -29,6 +30,8 @@
 </head>
 
 <body>
+	<nav th:replace="home.html::menu">
+	</nav>
 	<main>
 	<table class="post-list">
 		<thead>
