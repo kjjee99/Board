@@ -25,7 +25,7 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		List<Boards> list = service.showList();
 		mav.addObject("posts", list);
-		mav.setViewName("boardList");
+		mav.setViewName("/post/boardList");
 		return mav;
 	}
 }

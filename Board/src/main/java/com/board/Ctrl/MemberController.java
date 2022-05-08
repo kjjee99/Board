@@ -25,7 +25,7 @@ public class MemberController {
 	public ModelAndView getInfoToSignUp() {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user", new MemberDTO());
-		mv.setViewName("getMemberInfo");
+		mv.setViewName("/member/getMemberInfo");
 		return mv;
 	}
 	
@@ -33,7 +33,7 @@ public class MemberController {
 	public ModelAndView doSignUp(@ModelAttribute("user") MemberDTO member) {
 		ModelAndView mv = new ModelAndView();
 		service.addMember(member);
-		mv.setViewName("signUp_success");
+		mv.setViewName("/member/signUp_success");
 		return mv;
 	}
 	
@@ -41,7 +41,7 @@ public class MemberController {
 	public ModelAndView login() {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("user", new MemberDTO());
-		mav.setViewName("login");
+		mav.setViewName("/member/login");
 		return mav;
 	}
 	
