@@ -2,6 +2,7 @@ package com.board.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,16 +27,26 @@ public class BoardService {
 		list = boardDAO.findAll();
 		return list;
 	}
+	
+	/* 게시판 내용 가져오기 */
+	public BoardDTO getPost(int id) {
+//		Optional<Boards> data = boardDAO.findById(board_id);
+		Boards data = boardDAO.findByBoardId(id).get();
+		BoardDTO post = BoardDTO.builder().title(data.getTitle()).content(data.getContent())
+				.writer(data.getWriter()).regDate(data.getRegDate()).build();
+//		data.ifPresent(board -> post.setBoard(board));
+		return post;
+	}
 
 	/* 게시판 저장하기 */
 	public boolean savePost(BoardDTO post) {
 		try {
-			if (post.getWriter() == null || post.getReg_date() == null) {
+			if (post.getWriter() == null || post.getRegDate() == null) {
 				log.error("null error");
 				return false;
 			} else {
 				boardEntity = Boards.builder().title(post.getTitle()).content(post.getContent())
-						.writer(post.getWriter()).regDate(post.getReg_date()).build();
+						.writer(post.getWriter()).regDate(post.getRegDate()).build();
 				boardDAO.save(boardEntity);
 				return true;
 			}
@@ -44,7 +55,6 @@ public class BoardService {
 			log.error(e.getMessage());
 		}
 		return false;
-
 	}
 
 	/* 게시판 수정하기 */
