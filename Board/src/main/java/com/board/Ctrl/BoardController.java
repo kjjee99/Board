@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -47,7 +48,7 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		Date date = new Date();
 		post.setWriter("aaa");
-		post.setReg_date(date);
+		post.setRegDate(date);
 		boolean result = service.savePost(post);
 		if(result) {
 			mav.setViewName("redirect:/board/list");
@@ -58,9 +59,11 @@ public class BoardController {
 		return mav;
 	}
 	
-	@PostMapping()
-	public ModelAndView showPost() {
+	@GetMapping("/detail")
+	public ModelAndView detailPost(@RequestParam("id") int postNumber) {
 		ModelAndView mav = new ModelAndView();
+		BoardDTO post = service.getPost(postNumber);
+		mav.addObject("post", post);
 		mav.setViewName("/post/post_detail");
 		return mav;
 	}
