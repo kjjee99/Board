@@ -45,15 +45,15 @@
 		</thead>
 		<tbody class="list-row">
 			<tr th:if="${not #lists.isEmpty(posts)}" th:each="post: ${posts}">
-				<td th:text="${post.board_id}"></td>
+				<td th:text="${post.boardId}"></td>
 				<td>
-					<a th:href="'/board/list'+'${post.board_id}'" th:text="${post.title}" id="post-link"></a>
+					<a th:href="@{/board/detail(id=${post.boardId})}" th:text="${post.title}" id="post-link"></a>
 				</td>
 				<td th:text="${post.writer}"></td>
-				<td th:text="${post.reg_date} ? 
-				${#calendars.format(post.reg_date, 'yyyy-MM-dd')} : '작성된 날짜가 없습니다.'"></td>
-				<td th:text="${post.update_date} ? 
-				${#calendars.format(post.update_date, 'yyyy-MM-dd')} : '-'"></td>
+				<td th:text="${post.regDate} ? 
+				${#calendars.format(post.regDate, 'yyyy-MM-dd')} : '작성된 날짜가 없습니다.'"></td>
+				<td th:text="${post.updateDate} ? 
+				${#calendars.format(post.updateDate, 'yyyy-MM-dd')} : '-'"></td>
 			</tr>
 			<tr th:unless="${not #lists.isEmpty(posts)}">
 				<td colspan="3">조회된 결과가 없습니다.</td>
