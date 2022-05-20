@@ -25,7 +25,7 @@ public class Boards {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="board_id")
-	private int board_id;
+	private int boardId;
 	@Column(name = "writer")
 	private String writer;
 	@Column(name = "title")
@@ -33,19 +33,19 @@ public class Boards {
 	@Column(name = "content")
 	private String content;
 	@Column(name = "reg_date")
-	private Date reg_date;
+	private Date regDate;
 	@Column(name = "update_date")
-	private Date update_date;
+	private Date updateDate;
 	@Column(name = "delete_date")
-	private Date delete_date;
+	private Date deleteDate;
 	
 	@Builder
 	public Boards(String writer, String title, String content, Date regDate, Date updateDate, Date delDate) {
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
-		this.reg_date = regDate;
-		this.update_date = updateDate;
-		this.delete_date = delDate;
+		this.regDate = regDate;
+		this.updateDate = updateDate;
+		this.deleteDate = delDate;
 	}
 }
