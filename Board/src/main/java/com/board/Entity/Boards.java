@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -22,7 +23,7 @@ import lombok.ToString;
 public class Boards {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="board_id")
 	private int board_id;
 	@Column(name = "writer")
@@ -40,7 +41,6 @@ public class Boards {
 	
 	@Builder
 	public Boards(String writer, String title, String content, Date regDate, Date updateDate, Date delDate) {
-		this.board_id += 1;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
