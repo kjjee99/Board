@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+
+<head>
+	<title></title>
+</head>
+
+<body>
+	<main>
+	<div class="header">
+		<h2 th:text="${post.title}"></h2>
+		<a href="#">수정</a>
+		<button>삭제</button>
+	<div>
+	<div class="content">
+		<p th:text="${post.content}"></p>
+	<div>
+	</main>
+</body>
+
+</html>
