@@ -1,4 +1,4 @@
-package com.board.DAO;
+package com.board.Repository;
 
 import java.util.Optional;
 
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.board.Entity.Boards;
 
 @Repository
-public interface BoardDAO extends JpaRepository<Boards, String>{
+public interface BoardRepository extends JpaRepository<Boards, String>{
 
 	Optional<Boards> findByBoardId(int id);
 
