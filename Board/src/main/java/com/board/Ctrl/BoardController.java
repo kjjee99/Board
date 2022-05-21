@@ -1,7 +1,10 @@
 package com.board.Ctrl;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.board.DTO.BoardDTO;
 import com.board.Entity.Boards;
 import com.board.Service.BoardService;
+import com.board.Utils.ScriptUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,7 +52,7 @@ public class BoardController {
 	}
 	
 	/* 작성한 게시글 저장하기 */
-	@PostMapping("/post.do")
+	@PostMapping("/api/post.do")
 	public ModelAndView doPost(@ModelAttribute BoardDTO post, RedirectAttributes re) {
 		ModelAndView mav = new ModelAndView();
 		Date date = new Date();
@@ -70,7 +74,6 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		BoardDTO post = service.getPost(postNumber);
 		mav.addObject("post", post);
-		System.out.println(post.getRegDate());
 		mav.setViewName("/post/post_detail");
 		return mav;
 	}
@@ -84,7 +87,7 @@ public class BoardController {
 	}
 	
 	/* 수정한 게시글 업데이트하기 */
-	@PutMapping("/post/edit.do")
+	@PutMapping("/api/post/edit.do")
 	public ModelAndView updateToDB(BoardDTO board) {
 		ModelAndView mav = new ModelAndView();
 		board.setUpdateDate(new Date());
@@ -94,9 +97,15 @@ public class BoardController {
 	}
 	
 	/* 게시글 삭제하기 */
-	@DeleteMapping("/post")
-	public ModelAndView deletePost(@RequestParam("id") int postNumber) {
+	@DeleteMapping("/api/post")
+	public ModelAndView deletePost(HttpServletResponse response, @RequestParam("id") int postNumber) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		int result = service.deletePost(postNumber);
+		//삭제할 수 없는 id인 경우, 0을 반환받고 삭제할 수 없다는 alert 창 띄우기
+		if(result == 0) {
+			ScriptUtils.alertAndBackPage(response, "삭제할 수 없습니다.");
+			return null;
+		}
 		mav.setViewName("redirect:/board/list");
 		return mav;
 	}

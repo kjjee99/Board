@@ -11,6 +11,7 @@ import com.board.Entity.Boards;
 public interface BoardRepository extends JpaRepository<Boards, String>{
 
 	Optional<Boards> findByBoardId(int id);
+	int deleteByBoardId(int id);
 
 
 

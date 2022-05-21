@@ -7,9 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.board.DAO.BoardDAO;
 import com.board.DTO.BoardDTO;
 import com.board.Entity.Boards;
+import com.board.Repository.BoardRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,20 +18,20 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardService {
 
 	@Autowired
-	BoardDAO boardDAO;
+	BoardRepository boardRepository;
 	Boards boardEntity;
 
 	/* 게시판 리스트 가져오기 */
 	public List<Boards> getList() {
 		List<Boards> list = new ArrayList<>();
-		list = boardDAO.findAll();
+		list = boardRepository.findAll();
 		return list;
 	}
 	
 	/* 게시판 내용 가져오기 */
 	public BoardDTO getPost(int id) {
-//		Optional<Boards> data = boardDAO.findById(board_id);
-		Boards data = boardDAO.findByBoardId(id).get();
+//		Optional<Boards> data = repository.findById(board_id);
+		Boards data = boardRepository.findByBoardId(id).get();
 		BoardDTO post = BoardDTO.builder().title(data.getTitle()).content(data.getContent())
 				.writer(data.getWriter()).regDate(data.getRegDate()).build();
 //		data.ifPresent(board -> post.setBoard(board));
@@ -44,12 +44,16 @@ public class BoardService {
 			if (post.getWriter() == null || post.getRegDate() == null) {
 				log.error("null error");
 				return false;
-			} else {
-				boardEntity = Boards.builder().title(post.getTitle()).content(post.getContent())
-						.writer(post.getWriter()).regDate(post.getRegDate()).build();
-				boardDAO.save(boardEntity);
-				return true;
+			} 
+			
+			if(post.getUpdateDate() != null) {
+				Boards.builder().updateDate(post.getUpdateDate()).build();
 			}
+			boardEntity = Boards.builder().title(post.getTitle()).content(post.getContent())
+					.writer(post.getWriter()).regDate(post.getRegDate()).build();
+			System.out.println(boardEntity.getUpdateDate());
+//			boardRepository.save(boardEntity);
+				return true;
 
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -63,7 +67,13 @@ public class BoardService {
 	}
 
 	/* 게시판 삭제하기 */
-	public void deletePost() {
-
+	public int deletePost(int id) {
+		try {
+			int result = boardRepository.deleteByBoardId(id);
+			return result;
+		}catch(Exception e) {
+			log.error(e.getMessage());
+		}
+		return 0;
 	}
 }

@@ -1,5 +1,6 @@
 package com.board.DTO;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,13 @@ public class MemberDTO {
 	private String email;
 	private String address;
 	
+//	@Builder
+//	public MemberDTO(String id, String pw) {
+//		this.id = id;
+//		this.pw = pw;
+//	}
+	
+	@Builder
 	public MemberDTO(String id, String pw, String name, String phone, String email, String address) {
 		this.id = id;
 		this.pw = pw;

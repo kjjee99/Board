@@ -4,46 +4,12 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Home</title>
-	<style>
-		* {
-			margin: 0;
-			padding: 0;
-		}
-
-		.menu {
-			background-color: aliceblue;
-			width: 100%;
-			height: 40px;
-			margin: 0;
-			padding: 0;
-		}
-		.menu ul{
-			display: flex;
-			list-style: none;
-		}
-		.menu ul .blank-space{
-			flex-grow: 1;
-		}
-		
-		.menu ul li{
-			padding: 4px;
-		}
-
-		.menu ul li a {
-			text-decoration: none;
-			color: black;
-			padding: 5px;
-		}
-
-		.menu ul li a:hover {
-			background-color: lightblue;
-		}
-	</style>
+	<link rel="stylesheet" th:href="@{/css/menu.css}"/>
 </head>
 
 <body>
 	<header>
-		<nav class="menu">
+		<nav class="menu" th:fragment="menu">
 			<ul>
 				<li><a href="/board/list">게시판</a></li>
 				<li class="blank-space"></li>

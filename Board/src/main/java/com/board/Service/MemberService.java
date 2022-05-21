@@ -5,9 +5,9 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.board.DAO.MemberDAO;
 import com.board.DTO.MemberDTO;
 import com.board.Entity.Member;
+import com.board.Repository.MemberRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class MemberService {
 	@Autowired
-	MemberDAO dao;
+	MemberRepository dao;
 	Member entity;
 
 	/* 회원 등록 */
