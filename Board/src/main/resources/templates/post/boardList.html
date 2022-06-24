@@ -30,8 +30,9 @@
 </head>
 
 <body>
-	<nav th:replace="home.html::menu">
+	<nav th:replace="menu.html::nav">
 	</nav>
+
 	<main>
 	<table class="post-list">
 		<thead>
@@ -60,6 +61,7 @@
 			</tr>
 		</tbody>
 	</table>
+	
 	<div>
 		<a href="/home" class="go-home">홈으로</a>
 		<a href="/board/post" class="post-writing">글쓰기</a>
