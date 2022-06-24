@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http:www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Home</title>
+	<link rel="stylesheet" th:href="@{/css/menu.css}"/>
+</head>
+
+<body>
+	<header>
+		<nav class="menu" th:fragment="menu">
+			<ul>
+				<li><a href="/board/list">게시판</a></li>
+				<li class="blank-space"></li>
+				<li><a href="/account/login" th:text="${btn} ? ${btn} : '로그인'"></a></li>
+				<li><a href="/account/user">회원가입</a></li>
+			</ul>
+		</nav>
+	</header>
+
+</body>
+
+</html>
